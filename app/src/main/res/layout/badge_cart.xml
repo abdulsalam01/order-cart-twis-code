@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="60dp"
+    android:layout_height="fill_parent"
+    android:layout_gravity="end" >
+
+    <!-- Menu Item Image -->
+    <ImageView
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_shopping_cart_24" />
+
+    <!-- Badge Count -->
+    <TextView
+        android:id="@+id/tv_number_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:padding="16dp"
+        android:text="@string/number_items"
+        android:textStyle="bold"
+        android:textColor="@color/yellow_700"
+        tools:ignore="RelativeOverlap" />
+
+</RelativeLayout>

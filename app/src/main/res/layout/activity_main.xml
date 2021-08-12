@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentView"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.MainActivity">
+
+    <include layout="@layout/toolbar" android:id="@+id/toolbarLayout"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_products"
+        android:layout_below="@id/toolbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/category_text"
+            android:gravity="center"
+            app:backgroundTint="@color/white"
+            app:iconGravity="top"
+            app:icon="@drawable/ic_baseline_format_list_bulleted_24"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayExtended"
+            app:cornerRadius="3dp" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/filter_text"
+            android:gravity="center"
+            app:backgroundTint="@color/white"
+            app:iconGravity="top"
+            app:icon="@drawable/ic_baseline_filter_list_24"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayExtended"
+            app:cornerRadius="1dp" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Twiscode</string>
+    <string name="number_items">0</string>
+    <string name="category_text">Category</string>
+    <string name="filter_text">Filter</string>
+    <string name="cart_text">Add to Cart</string>
+    <string name="plus_text">+</string>
+    <string name="minus_text">-</string>
+</resources>
