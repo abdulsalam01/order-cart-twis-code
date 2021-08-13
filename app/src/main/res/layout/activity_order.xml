@@ -53,8 +53,21 @@
                 tools:ignore="RelativeOverlap" />
 
             <TextView
+                android:id="@+id/rp_text"
+                android:layout_below="@id/total_text"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/yellow_200"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rp" />
+
+            <TextView
                 android:id="@+id/total_price"
                 android:layout_below="@id/total_text"
+                android:layout_toRightOf="@id/rp_text"
+                android:layout_toEndOf="@id/rp_text"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
                 android:textColor="@color/yellow_200"

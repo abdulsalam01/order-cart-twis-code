@@ -40,7 +40,7 @@ class ProductCartAdapter(
             holder.numberProduct!!.text = i.toString()
 
             this.total_price = i * item.prices
-            this.total.text = "Rp. $total_price"
+            this.total.text = "$total_price"
         }
 
         holder.btnMinus?.setOnClickListener {
@@ -51,10 +51,10 @@ class ProductCartAdapter(
                 this.total_price = i * item.prices
             }
 
-            this.total.text = "Rp. $total_price"
+            this.total.text = "R$total_price"
         }
 
-        this.total.text = "Rp. ${item.prices + this.total.text.toString().toInt()}"
+        this.total.text = "${item.prices + this.total.text.toString().toInt()}"
     }
 
     override fun getItemCount(): Int {
