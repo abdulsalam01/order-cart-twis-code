@@ -8,15 +8,17 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.carteasy.v1.lib.Carteasy
 import com.example.twiscode.R
 import com.example.twiscode.models.Items
 import com.squareup.picasso.Picasso
 
 class ProductCartAdapter(
     val data: List<Items>,
-    val context: Context)
+    val context: Context,
+    val total: TextView)
     : RecyclerView.Adapter<ProductCartAdapter.ViewHolder>() {
+
+    private var total_price: Float = 0f
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -29,23 +31,38 @@ class ProductCartAdapter(
         val item = this.data.get(position)
 
         Picasso.get().load(item.image).into(holder.imgProduct)
-//        holder.titleProduct?.text = item.title
-//        holder.categoryProduct?.text = item.category
-//        holder.priceProduct?.text = "Rp. ${item.price}"
+        holder.titleProduct?.text = item.title
+        holder.categoryProduct?.text = item.category
+        holder.priceProduct?.text = "Rp. ${item.prices}"
 
         holder.btnPlus?.setOnClickListener {
-            val i: Int = holder.numberProduct?.text as Int + 1
+            val i: Int = holder.numberProduct?.text.toString().toInt() + 1
             holder.numberProduct!!.text = i.toString()
+
+            this.total_price = i * item.prices
+            this.total.text = "Rp. $total_price"
         }
 
         holder.btnMinus?.setOnClickListener {
-            val i: Int = holder.numberProduct?.text as Int - 1
-            if (i >= 0) holder.numberProduct!!.text = i.toString()
+            val i: Int = holder.numberProduct?.text.toString().toInt() - 1
+            if (i >= 0) {
+                holder.numberProduct!!.text = i.toString()
+
+                this.total_price = i * item.prices
+            }
+
+            this.total.text = "Rp. $total_price"
         }
+
+        this.total.text = "Rp. ${item.prices + this.total.text.toString().toInt()}"
     }
 
     override fun getItemCount(): Int {
         return this.data.size
+    }
+
+    fun getTotalPrice() : Float {
+        return total_price
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

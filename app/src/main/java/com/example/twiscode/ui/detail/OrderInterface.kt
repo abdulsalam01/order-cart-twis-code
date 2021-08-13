@@ -12,4 +12,5 @@ interface OrderInterface {
     fun onSetupToolbar(context: Context): Unit
     fun updateCartItems(context: Context, menu: Menu?, num: Int): Unit
     fun getProducts(progressBar: ProgressBar, list: RecyclerView, context: Context): Unit
+    fun onOrderClick(context: Context): Unit
 }

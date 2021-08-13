@@ -12,8 +12,7 @@ import com.carteasy.v1.lib.Carteasy
 import com.example.twiscode.R
 import com.example.twiscode.models.Items
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
-import com.google.gson.JsonParser
+import com.nu.nucount.extension.database.ItemDb
 import com.squareup.picasso.Picasso
 
 class ProductAdapter(val data: List<Items>, val context: Context)
@@ -32,16 +31,17 @@ class ProductAdapter(val data: List<Items>, val context: Context)
         Picasso.get().load(item.image).into(holder.imgProduct)
         holder.titleProduct?.text = item.title
         holder.categoryProduct?.text = item.category
-        holder.priceProduct?.text = "Rp. ${item.price}"
+        holder.priceProduct?.text = "Rp. ${item.prices}"
 
         holder.btnCart?.setOnClickListener {
-            val cart = Carteasy()
+            val itemCart = ItemDb(this.context)
+            val existItem = itemCart.getById(item.id)
 
-            if (!cart.doesIDExistInCart(item.id.toString(), this.context)) {
-                cart.add(item.id.toString(), "product", item.image)
-                cart.commit(this.context)
+            if (existItem.id <= 0) {
+                itemCart.create(item)
+                Snackbar.make(holder.btnCart!!, "Added!", Snackbar.LENGTH_SHORT).show()
             } else {
-                Snackbar.make(holder.btnCart!!, "Already added", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(holder.btnCart!!, "Already Added", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

@@ -80,10 +80,37 @@ class MainImplementation: MainInterface {
     }
 
     override fun getProducts(api: ApiService, progressBar: ProgressBar,
-                             list: RecyclerView, context: Context) {
+                             list: RecyclerView, context: Context, sort: String) {
         progressBar.visibility = View.VISIBLE
 
-        api.getProductList().enqueue(object : Callback<List<Items>> {
+        api.getProductList(sort).enqueue(object : Callback<List<Items>> {
+
+            override fun onResponse(call: Call<List<Items>>, response: Response<List<Items>>) {
+                val items = response.body()
+
+                if (items!!.size > 0) {
+                    list.adapter = ProductAdapter(items, context = context)
+                }
+
+                progressBar.visibility = View.GONE
+            }
+
+            override fun onFailure(call: Call<List<Items>>, t: Throwable) {
+                progressBar.visibility = View.GONE
+                Snackbar.make(list, t.message!!, Snackbar.LENGTH_SHORT).show()
+            }
+
+        })
+    }
+
+    override fun getProductByCategory(
+        api: ApiService,
+        progressBar: ProgressBar,
+        list: RecyclerView,
+        context: Context,
+        sort: String
+    ) {
+        api.getProductListByCategory(sort).enqueue(object : Callback<List<Items>> {
 
             override fun onResponse(call: Call<List<Items>>, response: Response<List<Items>>) {
                 val items = response.body()

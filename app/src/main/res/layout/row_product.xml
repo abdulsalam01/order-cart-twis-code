@@ -14,8 +14,8 @@
 
         <RelativeLayout
             android:padding="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="267dp">
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
 
             <ImageView
                 android:id="@+id/img_product"
@@ -36,29 +36,29 @@
 
             <TextView
                 android:id="@+id/price_product"
-                android:layout_marginRight="7dp"
                 android:layout_marginEnd="7dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title_product"
-                android:text="@string/app_name"/>
+                android:text="@string/app_name"
+                android:layout_marginRight="7dp" />
 
             <TextView
                 android:id="@+id/category_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title_product"
-                android:layout_toRightOf="@id/price_product"
                 android:layout_toEndOf="@id/price_product"
                 android:text="@string/app_name"
-                android:maxLength="30"/>
+                android:maxLength="30"
+                android:layout_toRightOf="@id/price_product" />
 
             <Button
                 android:id="@+id/btn_add_cart"
                 android:background="@color/blue_200"
                 android:layout_marginTop="30dp"
                 android:layout_below="@id/category_product"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/cart_text"/>
         </RelativeLayout>

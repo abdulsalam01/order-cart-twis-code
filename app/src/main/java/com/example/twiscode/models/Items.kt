@@ -8,12 +8,11 @@ data class Items(
         @SerializedName("title")
         var title: String,
         @SerializedName("price")
-        var price: Float,
+        var prices: Float,
         @SerializedName("description")
         var description: String,
         @SerializedName("category")
         var category: String,
         @SerializedName("image")
         var image: String
-) {
-}
+)

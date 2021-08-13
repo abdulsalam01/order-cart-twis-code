@@ -14,6 +14,7 @@ import com.example.twiscode.R
 import com.example.twiscode.models.Items
 import com.example.twiscode.services.ApiService
 import com.example.twiscode.ui.BaseApp
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class MainActivity : BaseApp() {
 
@@ -22,7 +23,9 @@ class MainActivity : BaseApp() {
 
     private lateinit var list: RecyclerView
     private lateinit var api: ApiService
-    private lateinit var data: List<Items>
+
+    private lateinit var filter: ExtendedFloatingActionButton
+    private lateinit var category: ExtendedFloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,8 @@ class MainActivity : BaseApp() {
         build(this, R.id.parentView)
 
         this.list = findViewById(R.id.rv_products)
+        this.filter = findViewById(R.id.filter)
+        this.category = findViewById(R.id.category)
 
         this.mainImplementation = MainImplementation()
         this.mainImplementation.onSetupToolbar(this)
@@ -37,7 +42,21 @@ class MainActivity : BaseApp() {
         this.list.layoutManager = GridLayoutManager(this, 2)
 
         this.api = this.mainImplementation.initRestClient(this)
-        this.mainImplementation.getProducts(this.api, this.get(), this.list, this)
+        this.mainImplementation.getProducts(this.api, this.get(), this.list, this, "asc")
+
+        this.filter.setOnClickListener {
+            if (it.isLongClickable)
+                this.mainImplementation.getProducts(this.api, this.get(), this.list, this, "asc")
+            else
+                this.mainImplementation.getProducts(this.api, this.get(), this.list, this, "desc")
+        }
+
+        this.category.setOnClickListener {
+            if (it.isLongClickable)
+                this.mainImplementation.getProducts(this.api, this.get(), this.list, this, "asc")
+            else
+                this.mainImplementation.getProductByCategory(this.api, this.get(), this.list, this, "asc")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

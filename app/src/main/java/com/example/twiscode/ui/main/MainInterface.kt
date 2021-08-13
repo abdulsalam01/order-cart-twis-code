@@ -13,5 +13,8 @@ interface MainInterface {
     fun onSetupToolbar(context: Context): Unit
     fun updateCartItems(context: Context, menu: Menu?, num: Int): Unit
     fun initRestClient(context: Context): ApiService
-    fun getProducts(api: ApiService, progressBar: ProgressBar, list: RecyclerView, context: Context): Unit
+    fun getProducts(api: ApiService, progressBar: ProgressBar,
+                    list: RecyclerView, context: Context, sort: String): Unit
+    fun getProductByCategory(api: ApiService, progressBar: ProgressBar,
+                             list: RecyclerView, context: Context, sort: String): Unit
 }

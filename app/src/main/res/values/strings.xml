@@ -6,4 +6,7 @@
     <string name="cart_text">Add to Cart</string>
     <string name="plus_text">+</string>
     <string name="minus_text">-</string>
+    <string name="total_harga">Total Harga</string>
+    <string name="zero">0</string>
+    <string name="order">Order</string>
 </resources>

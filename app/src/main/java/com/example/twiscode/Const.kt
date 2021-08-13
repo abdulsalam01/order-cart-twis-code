@@ -11,4 +11,5 @@ object Const {
     // alternate-api
     const val BASE_URL_ALT = "https://fakestoreapi.com"
     const val ITEM_URL_ALT = "/products"
+    const val ITEM_BY_CATEGORY_ALT = "$ITEM_URL_ALT/category/jewelery"
 }

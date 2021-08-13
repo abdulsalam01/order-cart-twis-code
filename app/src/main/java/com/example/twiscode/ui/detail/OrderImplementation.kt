@@ -1,11 +1,13 @@
 package com.example.twiscode.ui.detail
 
 import android.content.Context
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuItemCompat
@@ -13,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.carteasy.v1.lib.Carteasy
 import com.example.twiscode.R
 import com.example.twiscode.adapter.ProductCartAdapter
-import com.example.twiscode.models.Items
+import com.nu.nucount.extension.database.ItemDb
+import org.w3c.dom.Text
 
 class OrderImplementation: OrderInterface {
 
@@ -46,16 +49,21 @@ class OrderImplementation: OrderInterface {
 
     override fun getProducts(progressBar: ProgressBar,
                              list: RecyclerView, context: Context) {
-        val carteasy = Carteasy()
-        val items = carteasy.ViewAll(context).entries
-        val itemsList = ArrayList<Items>(items.size + 1)
+        val itemDb = ItemDb(context)
+        val text_total = ((context) as AppCompatActivity).findViewById<TextView>(R.id.total_price)
 
-        items.iterator().forEach { it ->
-            it.value.iterator().forEach { t ->
-                itemsList.add(t.value as Items)
-            }
+        list.adapter = ProductCartAdapter(itemDb.getAll(), context = context, text_total)
+        (list.adapter as ProductCartAdapter).notifyDataSetChanged()
+    }
+
+    override fun onOrderClick(context: Context) {
+        val db = ItemDb(context)
+
+        if (db.deleteAll() > 0) {
+            val text_total = ((context) as AppCompatActivity).findViewById<TextView>(R.id.total_price)
+
+            text_total.text = context.getString(R.string.zero)
+            Toast.makeText(context, "Order Successfully!", Toast.LENGTH_SHORT).show()
         }
-
-        list.adapter = ProductCartAdapter(itemsList, context = context)
     }
 }
