@@ -51,7 +51,7 @@ class ProductCartAdapter(
                 this.total_price = i * item.prices
             }
 
-            this.total.text = "R$total_price"
+            this.total.text = "$total_price"
         }
 
         this.total.text = "${item.prices + this.total.text.toString().toInt()}"
